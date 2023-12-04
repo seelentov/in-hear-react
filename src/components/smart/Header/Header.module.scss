@@ -1,0 +1,54 @@
+.userImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  max-width: 51px;
+  max-height: 51px;
+  min-width: 51px;
+  min-height: 51px;
+  border-radius: 50%;
+  background: var(--color-gradient-primary);
+
+  img {
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.header {
+  padding: 10px 20px;
+  min-width: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  max-height: 70px;
+  gap: 30px;
+  @media (max-width: 992px) {
+    gap: 10px;
+  }
+  z-index: 10;
+
+  form{
+    width: 100%;
+  }
+}
+
+.burgerBtn{
+  translate: -10px 0px;
+}
+
+.link{
+  text-align: center;
+  color: white;
+  transition: all .2s;
+  &:hover{
+    color: black;
+  }
+  &:active{
+    color: transparent;
+  }
+}

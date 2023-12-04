@@ -1,0 +1,18 @@
+
+
+.list {
+  @media(min-width: 993px) {
+
+    >*:nth-child(1),
+    *:nth-child(2) {
+      width: 45%;
+
+      img {
+        border-radius: 30px;
+        width: 300px;
+        min-height: 300px;
+      }
+    }
+  }
+
+}

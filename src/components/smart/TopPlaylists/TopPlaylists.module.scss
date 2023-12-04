@@ -1,0 +1,16 @@
+
+
+.list {
+  @media(min-width: 993px) {
+
+    >*:nth-child(1),
+    >*:nth-child(2) {
+      width: 45%;
+      > *{
+        width: 100%;
+        background-position: center;
+      }
+    }
+  }
+
+}

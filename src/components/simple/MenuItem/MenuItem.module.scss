@@ -1,0 +1,39 @@
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  width: 100%;
+  background: var(--color-background);
+  transition: all 0.2s;
+  &:hover{
+    scale: 0.95;
+  }
+  
+  * {
+    color: var(--color-desc)
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+
+  >* {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.active {
+  cursor: default;
+  pointer-events: none;
+  background: var(--color-gradient-primary);
+  * {
+    color: var(--color-background)
+  }
+  &:hover{
+    scale: 1;
+  }
+}

@@ -1,0 +1,30 @@
+.tracksListGrid {
+  column-count: 2;
+
+  counter-reset: point;
+  list-style: none;
+  @media (max-width: 992px) {
+    column-count: 1;
+  }
+  > *{
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 11px;
+  }
+
+  > *:before {
+    content: counter(point);
+	counter-increment: point 1;
+  position: absolute;
+  top: 35%;
+  left: 0;
+  font-size: 20px;
+  }
+}
+
+.tracksListColumn{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+}

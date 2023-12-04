@@ -1,0 +1,24 @@
+.button {
+  border-radius: 12px;
+  padding: 5px 10px;
+  width: 100%;
+ 
+  color: var(--color-background);
+  background-size: 1px 200px;
+
+  &:not(:disabled) {
+    background: var(--color-gradient-primary);
+    transition: all .2s;
+    &:hover {
+      background: var(--color-gradient-secondary);
+    }
+
+    &:active {
+      transform: scaleX(0.98);
+    }
+  }
+
+  &:disabled {
+    background: var(--color-desc);
+  }
+}

@@ -1,0 +1,70 @@
+.player {
+  background: var(--color-player);
+  width: 100%;
+  z-index: 10;
+  position: relative;
+}
+
+.inner {
+  min-height: 105px;
+  max-height: 105px;
+  padding: 30px 20px;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.info{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 193px;
+}
+
+.progress{
+  display: flex;
+  align-items: center;
+  width: 320px;
+  input{
+    width: 250px;
+  }
+  span{
+    width: 30px;
+  }
+  gap: 10px;
+}
+.controls{
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.center{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.volume{
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.playlist{
+  min-height: 0;
+  max-height: 0px;
+  overflow-y: scroll;
+  transition: all .2s;
+}
+
+.active{
+  max-height: 200px;
+}
+
+.toggleButton{
+  width: 100%;
+}

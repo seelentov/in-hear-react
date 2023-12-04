@@ -1,0 +1,26 @@
+.track {
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 9px;
+  transition: scale .2s;
+  border-radius: 12px;
+  &:hover {
+    scale: 0.99
+  }
+  &:active {
+    background: var(--color-opacity-bg-2);
+  }
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-right: auto;
+}
+
+.active{
+  background: var(--color-opacity-bg-secondary);
+}

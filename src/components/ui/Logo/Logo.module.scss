@@ -1,0 +1,17 @@
+.logo {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  h1 {
+    font-size: 25px;
+    color: var(--color-primary);
+
+    span {
+      color: var(--color-secondary);
+      font-size: 19px;
+      font-style: italic;
+    }
+
+  }
+}

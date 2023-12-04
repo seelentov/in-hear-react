@@ -10,7 +10,7 @@ const initialState: User = {
 	login: 'master',
 	email: 'komkov222111@gmail.com',
 	tracks: [
-    
+    'asdhjkashdjashkdsa', 'jsakdjaskldjlkasad'
   ],
 	playlists: [
 

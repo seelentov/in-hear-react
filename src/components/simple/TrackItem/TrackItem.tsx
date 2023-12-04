@@ -1,8 +1,6 @@
 import cn from 'classnames'
-import { useActions } from 'hooks/useActions'
-import { useStoreBy } from 'hooks/useStoreBy'
-import { Track as ITrack } from 'models/Track'
-import { FC, useCallback, useMemo } from 'react'
+import { Track as ITrack, Track } from 'models/Track'
+import { FC, useMemo } from 'react'
 import { FaMinus, FaPause, FaPlay, FaPlus } from 'react-icons/fa'
 import styles from './TrackItem.module.scss'
 
@@ -10,44 +8,35 @@ export interface ITrackItemProps {
 	track: ITrack
 	showLikes?: boolean
 	canLike?: boolean
-	action?: 'add' | 'change'
-	index: number
+	currentId: string
+	play: boolean
+	userTracks: string[]
+	handleClick: (isActive: boolean, track: Track) => void
 }
 
 export const TrackItem: FC<ITrackItemProps> = ({
 	track,
 	showLikes,
 	canLike,
-	index,
-	action = 'add',
+	currentId,
+	play,
+	userTracks,
+	handleClick,
 }) => {
-	const { addToPlaylist, toggleTrack, changeTrack } = useActions()
-	const { currentId, play } = useStoreBy('player')
-
-	const active = useMemo(() => {
+	const isActive = useMemo(() => {
 		return currentId === track.id
-	}, [currentId])
+	}, [currentId, track.id])
 
-	const handleClick = useCallback(() => {
-		if (active) {
-			toggleTrack()
-		} else {
-			if (action === 'add') {
-				addToPlaylist(track)
-			} else {
-				changeTrack({ id: track.id, index })
-			}
-		}
-	}, [active, action])
-
-	const liked = false
+	const isLiked = useMemo(() => {
+		return userTracks?.includes(track.id)
+	}, [userTracks, track.id])
 
 	return (
 		<article
-			className={cn(styles.track, active && styles.active)}
-			onClick={handleClick}
+			className={cn(styles.track, isActive && styles.active)}
+			onClick={() => handleClick(isActive, track)}
 		>
-			{active ? (
+			{isActive ? (
 				play ? (
 					<FaPause size={16} color={'var(--color-primary)'} />
 				) : (
@@ -65,7 +54,7 @@ export const TrackItem: FC<ITrackItemProps> = ({
 				</p>
 			</div>
 			{canLike &&
-				(liked ? (
+				(isLiked ? (
 					<FaMinus size={16} color={'var(--color-text)'} />
 				) : (
 					<FaPlus size={16} color={'var(--color-text)'} />

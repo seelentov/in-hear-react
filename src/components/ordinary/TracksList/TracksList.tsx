@@ -1,8 +1,10 @@
 import cn from 'classnames'
 import { TrackItem } from 'components/simple/TrackItem/TrackItem'
 import { Track } from 'models/Track'
-import { FC, HTMLAttributes } from 'react'
+import { FC, HTMLAttributes, useCallback } from 'react'
 import styles from './TracksList.module.scss'
+import { useActions } from 'hooks/useActions'
+import { useStoreBy } from 'hooks/useStoreBy'
 
 export interface ITracksListProps extends HTMLAttributes<HTMLOListElement> {
 	tracks: Track[]
@@ -10,7 +12,6 @@ export interface ITracksListProps extends HTMLAttributes<HTMLOListElement> {
 	showLikes?: boolean
 	className?: string
 	canLike?: boolean
-	action?: 'add' | 'change'
 }
 
 export const TracksList: FC<ITracksListProps> = ({
@@ -19,9 +20,20 @@ export const TracksList: FC<ITracksListProps> = ({
 	showLikes,
 	className,
 	canLike,
-	action = 'add',
 	...rest
 }) => {
+	const { addToPlaylist, toggleTrack } = useActions()
+	const { currentId, play } = useStoreBy('player')
+	const { tracks: userTracks } = useStoreBy('user')
+
+	const handleClick = useCallback((isActive: boolean, track: Track) => {
+		if (isActive) {
+			toggleTrack()
+		} else {
+			addToPlaylist(track)
+		}
+	}, [])
+
 	return (
 		<section
 			className={cn(
@@ -30,14 +42,10 @@ export const TracksList: FC<ITracksListProps> = ({
 			)}
 			{...rest}
 		>
-			{tracks.map((track, index) => (
+			{tracks.map((track) => (
 				<TrackItem
-					index={index}
-					action={action}
-					track={track}
 					key={track.id}
-					showLikes={showLikes}
-					canLike={canLike}
+          {...{track, showLikes, canLike, currentId, play, userTracks, handleClick}}
 				/>
 			))}
 		</section>

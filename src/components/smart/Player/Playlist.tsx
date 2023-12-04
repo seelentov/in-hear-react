@@ -11,7 +11,6 @@ export const Playlist: FC<IPlaylistProps> = () => {
 	const { isPlayerOpen } = useStoreBy('ui')
 	return (
 		<TracksList
-			action='change'
 			tracks={playlist}
 			className={cn(isPlayerOpen && styles.active, styles.playlist)}
 		/>

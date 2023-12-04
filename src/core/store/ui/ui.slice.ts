@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 	isMenuOpen: false,
-	isPlayerOpen: true,
+	isPlayerOpen: false,
 }
 
 export const uiSlice = createSlice({

@@ -22,7 +22,13 @@ export const tracks = [
 		src: '/src/assets/test/GONEFludd_-_VTORNIK.mp3',
 		time: 11_200,
 	}),
-	
+	new Track({
+		id: '123khjkl12h3lhlk21j',
+		name: 'XУДРИЧ',
+		artist: 'GONE.Fludd',
+		src: '/src/assets/test/GONE_Fludd_Hudrich.mp3',
+		time: 13_900,
+	}),
 ]
 
 

@@ -44,19 +44,16 @@ export const playerSlice = createSlice({
 		},
 		addToPlaylist: (state, { payload: track }) => {
 			state.currentId = track.id
-			if (state.playlist.includes(track)) {
-				state.currentTrack = state.playlist.findIndex(
-					thisTrack => thisTrack.id === track.id
-				)
+			const existingTrackIndex = state.playlist.findIndex(
+				thisTrack => thisTrack.id === track.id
+			)
+			if (existingTrackIndex !== -1) {
+				console.log('includes')
+				state.currentTrack = existingTrackIndex
 			} else {
 				state.playlist.push(track)
 				state.currentTrack = state.playlist.length - 1
 			}
-			state.play = true
-		},
-		changeTrack: (state, { payload }) => {
-			state.currentTrack = payload.index
-			state.currentId = payload.id
 			state.play = true
 		},
 		changePlaylist: (state, { payload: tracks }) => {

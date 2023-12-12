@@ -10,13 +10,13 @@ export interface IArtistItemProps {
 }
 
 export const ArtistItem: FC<IArtistItemProps> = ({
-	artist: { name, img, likes, id },
+	artist: { name, imageUrl, likes, _id },
 	showLikes,
 }) => {
 	return (
-		<Link to={HREF.ARTISTS + id}>
+		<Link to={HREF.ARTISTS + _id}>
 			<article className={styles.artist}>
-				<img src={img} alt={name} />
+				<img src={imageUrl} alt={name} />
 				<h3>{name}</h3>
 				{showLikes && <p className='text-desc'>{likes} likes</p>}
 			</article>

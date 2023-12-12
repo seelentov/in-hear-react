@@ -19,7 +19,7 @@ export const Aside: FC<IAsideProps> = () => {
 		>
 			<Logo />
 
-			<Menu menu={MENU}/>
+			<Menu menu={MENU} />
 		</div>
 	)
 }

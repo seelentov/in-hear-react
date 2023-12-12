@@ -4,6 +4,7 @@
 @import './styles/text';
 @import './styles/themes';
 @import './styles/fonts';
+@import './styles/animations';
 
 
 //=======================================================================
@@ -84,7 +85,6 @@ textarea:active {
 button {
   cursor: pointer;
   color: var(--color-9);
-  background-color: inherit;
 }
 
 a {

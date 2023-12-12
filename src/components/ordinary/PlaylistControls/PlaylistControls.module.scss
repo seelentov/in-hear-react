@@ -1,0 +1,26 @@
+.icon {
+  transition: scale 0.2s;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-opacity-bg);
+
+  &:hover {
+    scale: 0.9;
+    background: var(--color-gradient-secondary)
+  }
+
+  &:active {
+
+    background: var(--color-text)
+  }
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

@@ -5,7 +5,6 @@ import {
 	RiHome2Fill,
 	RiMusic2Fill,
 	RiPolaroid2Fill,
-	RiTimer2Fill,
 } from 'react-icons/ri'
 import { HREF } from './routing.config'
 
@@ -38,11 +37,6 @@ export const MENU = [
 	{
 		name: 'Library',
 		links: [
-			{
-				name: 'Recent',
-				icon: <RiTimer2Fill />,
-				href: HREF.RECEIT,
-			},
 			{
 				name: 'Favorite',
 				icon: <RiHeart3Fill />,

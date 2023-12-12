@@ -3,28 +3,63 @@
 
   counter-reset: point;
   list-style: none;
+
   @media (max-width: 992px) {
     column-count: 1;
   }
-  > *{
+
+  >* {
+    overflow: hidden;
     position: relative;
     padding-left: 20px;
     margin-bottom: 11px;
   }
 
-  > *:before {
+  >*:before {
     content: counter(point);
-	counter-increment: point 1;
-  position: absolute;
-  top: 35%;
-  left: 0;
-  font-size: 20px;
+    counter-increment: point 1;
+    position: absolute;
+    top: 35%;
+    left: 0;
+    font-size: 100px;
+    z-index: -1;
+    color: var(--color-desc);
+    opacity: 0.6
   }
 }
 
-.tracksListColumn{
+.tracksListColumn {
   display: flex;
   flex-direction: column;
   gap: 10px;
   list-style: none;
+}
+
+.loading{
+  >*:before {
+    content: none;
+  }
+}
+
+
+.upload{
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 9px;
+  transition: scale .2s;
+  border-radius: 12px;
+  height: 54px;
+  background: var(--color-opacity-bg-secondary);
+
+  &:hover {
+    scale: 0.99
+  }
+
+  &:active {
+    background: var(--color-opacity-bg-2);
+
+  }
 }

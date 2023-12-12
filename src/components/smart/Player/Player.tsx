@@ -11,6 +11,7 @@ import styles from './Player.module.scss'
 import { Playlist } from './Playlist'
 import { ProgressBar } from './ProgressBar'
 import { Volume } from './Volume'
+import cn from 'classnames';
 
 export interface IPlayerProps {}
 
@@ -18,6 +19,7 @@ export const Player: FC<IPlayerProps> = () => {
 	const {
 		playlist: tracks,
 		currentTrack: trackIndex,
+    currentId: trackId,
 		play,
 	} = useStoreBy('player')
 	const { nextTrack, prevTrack, togglePlayer } = useActions()
@@ -41,11 +43,11 @@ export const Player: FC<IPlayerProps> = () => {
 		} else {
 			audioRef.current.pause()
 		}
-	}, [play, trackIndex])
+	}, [play, trackId])
 
 	return (
 		<>
-			<div className={styles.player}>
+			<div className={cn(styles.player, !trackId && styles.nonVisible)}>
 				<button className={styles.toggleButton} onClick={() => togglePlayer()}>
 					{isPlayerOpen ? (
 						<MdOutlineKeyboardArrowDown />

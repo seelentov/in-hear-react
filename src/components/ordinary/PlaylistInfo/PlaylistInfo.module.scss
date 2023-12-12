@@ -1,0 +1,81 @@
+.info {
+  min-width: 0;
+  padding: 15px;
+  border-radius: 12px;
+  -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  width: 100%;
+  max-height: 170px;
+  min-height: 170px;
+  height: 170px;
+  overflow-y: scroll;
+
+  textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+  }
+}
+
+.image {
+  min-width: 170px;
+  height: 170px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  border-radius: 30px;
+}
+
+.container {
+  min-height: 84px;
+  min-width: 0;
+  width: 100%;
+  gap: 15px;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 992px) {
+    flex-direction: column;
+
+  }
+
+  justify-content: space-between;
+}
+
+.playlistInfo {
+  min-width: 0;
+  width: 100%;
+
+  p {
+    margin: 20px 0;
+  }
+  form{
+    width: 100%;
+  }
+}
+
+.loading {
+  background-color: var(--color-desc);
+  animation: Loading linear infinite 2s;
+}
+
+@keyframes Loading {
+  0% {
+    opacity: 0.3
+  }
+
+  50% {
+    opacity: 0.6
+  }
+
+  100% {
+    opacity: 0.3
+  }
+}
+

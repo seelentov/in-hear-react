@@ -1,7 +1,7 @@
-import userImage from 'assets/default/user.png'
+import { HREF } from 'config/routing.config'
 import Hamburger from 'hamburger-react'
 import { useActions } from 'hooks/useActions'
-import { useIsAuth } from 'hooks/useAuth'
+import { useIsAuth } from 'hooks/useIsAuth'
 import { useResize } from 'hooks/useResize'
 import { useStoreBy } from 'hooks/useStoreBy'
 import { FC } from 'react'
@@ -16,6 +16,7 @@ export const Header: FC<IHeaderProps> = () => {
 	const { isMenuOpen } = useStoreBy('ui')
 	const { isScreenLg } = useResize()
 	const { toggleMenu } = useActions()
+  const {avatarUrl} = useStoreBy('user')
 
 	const isAuth = useIsAuth()
 
@@ -32,6 +33,7 @@ export const Header: FC<IHeaderProps> = () => {
 			)}
 			<form>
 				<Input
+					name='search'
 					icon={<CiSearch />}
 					placeholder='Search artist, track, playlist...'
 				/>
@@ -39,10 +41,10 @@ export const Header: FC<IHeaderProps> = () => {
 			{isScreenLg && (
 				<div className={styles.userImage}>
 					{isAuth ? (
-						<img src={userImage} />
+						<img src={avatarUrl} />
 					) : (
 						<div className={styles.link}>
-							<Link to='/'>
+							<Link to={HREF.LOGIN}>
 								Sign
 								<br />
 								In

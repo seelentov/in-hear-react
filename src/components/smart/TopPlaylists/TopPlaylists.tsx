@@ -1,6 +1,6 @@
 import { PlaylistsList } from 'components/ordinary/PlaylistsList/PlaylistsList'
 import { FC } from 'react'
-import { playlists } from 'services/testdata/playlists'
+import { useGetTopPlaylistsQuery } from 'store/api/playlist.api'
 import styles from './TopPlaylists.module.scss'
 
 export interface ITopPlaylistsProps {
@@ -8,11 +8,14 @@ export interface ITopPlaylistsProps {
 }
 
 export const TopPlaylists: FC<ITopPlaylistsProps> = ({ grid }) => {
+	const { data, isLoading } = useGetTopPlaylistsQuery()
+
 	return (
 		<div className={styles.topPlaylists}>
 			<h2>Top playlists</h2>
 			<PlaylistsList
-				playlists={playlists}
+				loading={isLoading}
+				playlists={data ? data : []}
 				grid={grid}
 				className={styles.list}
 				showLikes

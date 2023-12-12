@@ -1,20 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { PATH } from 'config/path.config'
 import { User } from 'models/User'
 
 const initialState: User = {
-	id: '',
-	name: 'Master Master',
-	img: PATH.DEFAULT.USER,
-	role: 'admin',
-	login: 'master',
-	email: 'komkov222111@gmail.com',
-	tracks: [
-    'asdhjkashdjashkdsa', 'jsakdjaskldjlkasad'
-  ],
-	playlists: [
-
-  ],
+	_id: '',
+	login: '',
+	avatarUrl: '',
+	role: '',
+	email: '',
+	token: '',
 }
 
 export const userSlice = createSlice({
@@ -22,24 +15,23 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		setUser: (state: User, { payload: user }) => {
-			state.id = user.id
-			state.name = user.name
-			state.img = user.img
+			state._id = user._id
 			state.role = user.role
 			state.login = user.login
 			state.email = user.email
-			state.tracks = user.tracks
-			state.playlists = user.playlists
+			state.avatarUrl = user.avatarUrl
+		},
+		setToken: (state: User, { payload: token }) => {
+			state.token = token
+			localStorage.setItem('token', token)
 		},
 		logout: (state: User) => {
-			state.id = initialState.id
-			state.name = initialState.name
-			state.img = initialState.img
+			state._id = initialState._id
 			state.role = initialState.role
 			state.login = initialState.login
 			state.email = initialState.email
-			state.tracks = initialState.tracks
-			state.playlists = initialState.playlists
+			state.avatarUrl = initialState.avatarUrl
+			localStorage.removeItem('token')
 		},
 	},
 })

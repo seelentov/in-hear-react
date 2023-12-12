@@ -1,53 +1,95 @@
 import cn from 'classnames'
 import { TrackItem } from 'components/simple/TrackItem/TrackItem'
-import { Track } from 'models/Track'
-import { FC, HTMLAttributes, useCallback } from 'react'
-import styles from './TracksList.module.scss'
+import { TrackLoading } from 'components/ui/TrackLoading/TrackLoading'
 import { useActions } from 'hooks/useActions'
 import { useStoreBy } from 'hooks/useStoreBy'
-
+import { Track } from 'models/Track'
+import { FC, HTMLAttributes } from 'react'
+import styles from './TracksList.module.scss'
+import { FaPlus } from 'react-icons/fa'
 export interface ITracksListProps extends HTMLAttributes<HTMLOListElement> {
-	tracks: Track[]
-	grid?: boolean
-	showLikes?: boolean
-	className?: string
-	canLike?: boolean
+  tracks?: Track[]
+  grid?: boolean
+  showLikes?: boolean
+  className?: string
+  canLike?: boolean
+  loading?: boolean
+  canUpload?: boolean
 }
 
 export const TracksList: FC<ITracksListProps> = ({
-	tracks,
-	grid,
-	showLikes,
-	className,
-	canLike,
-	...rest
+  tracks,
+  grid,
+  showLikes,
+  className,
+  canLike,
+  loading,
+  canUpload,
+  ...rest
 }) => {
-	const { addToPlaylist, toggleTrack } = useActions()
-	const { currentId, play } = useStoreBy('player')
-	const { tracks: userTracks } = useStoreBy('user')
+  const { playTracks, toggleTrack, addTrack, removeTrack } = useActions()
 
-	const handleClick = useCallback((isActive: boolean, track: Track) => {
-		if (isActive) {
-			toggleTrack()
-		} else {
-			addToPlaylist(track)
-		}
-	}, [])
 
-	return (
-		<section
-			className={cn(
-				className,
-				grid ? styles.tracksListGrid : styles.tracksListColumn
-			)}
-			{...rest}
-		>
-			{tracks.map((track) => (
-				<TrackItem
-					key={track.id}
-          {...{track, showLikes, canLike, currentId, play, userTracks, handleClick}}
-				/>
-			))}
-		</section>
-	)
+  const { currentId, play } = useStoreBy('player')
+  const { data: userTracks } = useStoreBy('lib')
+
+  const handlePlay = (isActive: boolean, currentTrack: string) => {
+    if (isActive) {
+      toggleTrack()
+    } else {
+      playTracks({ tracks, currentTrack })
+    }
+  }
+
+  if (loading) {
+    return (
+      <section
+        className={cn(
+          className,
+          grid ? styles.tracksListGrid : styles.tracksListColumn,
+          styles.loading
+        )}
+        {...rest}
+      >
+        {[...Array(4)].map(key => (
+          <TrackLoading key={key} />
+        ))}
+      </section>
+    )
+  }
+
+  return (
+    <section
+      className={cn(
+        className,
+        grid ? styles.tracksListGrid : styles.tracksListColumn
+      )}
+      {...rest}
+    >
+      {canUpload && <div className={styles.upload}>
+        <FaPlus size={16} />
+      </div>}
+      {tracks?.map(track => {
+        const isActive = currentId === track._id
+
+        return (
+          <TrackItem
+            onClick={() => handlePlay(isActive, track._id)}
+            key={track._id}
+            {...{
+              track,
+              showLikes,
+              canLike,
+              currentId,
+              play,
+              userTracks,
+              addTrack,
+              removeTrack,
+            }}
+          />
+        )
+      })}
+      
+    </section>
+  )
 }

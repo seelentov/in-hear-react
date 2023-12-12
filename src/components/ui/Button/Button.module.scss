@@ -3,7 +3,7 @@
   padding: 5px 10px;
   width: 100%;
  
-  color: var(--color-background);
+  color: var(--color-background) !important;
   background-size: 1px 200px;
 
   &:not(:disabled) {

@@ -1,14 +1,14 @@
+import { InputRange } from 'components/ui/InputRange/InputRange'
 import { FC, useEffect, useState } from 'react'
 import { IoMdVolumeHigh, IoMdVolumeLow, IoMdVolumeOff } from 'react-icons/io'
 import styles from './Player.module.scss'
-import { InputRange } from 'components/ui/InputRange/InputRange'
 
 export interface IVolumeProps {
 	audioRef: React.MutableRefObject<HTMLAudioElement>
 }
 
 export const Volume: FC<IVolumeProps> = ({ audioRef }) => {
-	const [volume, setVolume] = useState(60)
+	const [volume, setVolume] = useState(30)
 	const [muteVolume, setMuteVolume] = useState(false)
 
 	useEffect(() => {

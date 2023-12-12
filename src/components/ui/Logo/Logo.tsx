@@ -1,4 +1,4 @@
-import logo from 'assets/svg/logo.svg'
+import logo from '/svg/logo.svg'
 import { FC } from 'react'
 import styles from './Logo.module.scss'
 

@@ -1,0 +1,10 @@
+.bottom{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  align-items: center;
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+  
+}

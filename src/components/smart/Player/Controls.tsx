@@ -42,15 +42,15 @@ export const Controls: FC<IControlsProps> = ({
 
 	const togglePlayPause = () => {
 		toggleTrack()
-    setIsPlaying(play)
+		setIsPlaying(play)
 	}
 
 	const playAnimationRef = useRef()
 
 	const repeat = useCallback(() => {
-		const currentTime = audioRef.current.currentTime
+		const currentTime = audioRef.current?.currentTime
 		setTimeProgress(currentTime)
-		progressBarRef.current.value = currentTime.toString()
+		progressBarRef.current.value = currentTime?.toString()
 		progressBarRef.current.style.setProperty(
 			'--range-progress',
 			`${(parseInt(progressBarRef.current.value) / duration) * 100}%`

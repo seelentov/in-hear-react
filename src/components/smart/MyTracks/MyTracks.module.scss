@@ -10,7 +10,6 @@
 .tracks{
   list-style: none;
   > *{
-    padding: 0 !important;
     &:before{
       content: none;
     }

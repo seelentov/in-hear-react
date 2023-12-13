@@ -14,11 +14,11 @@ export interface ITrackItemProps extends HTMLAttributes<HTMLDivElement> {
   track: ITrack
   showLikes?: boolean
   canLike?: boolean
-  currentId: string
-  play: boolean
-  userTracks: Lib
-  addTrack: ActionCreatorWithPayload<any, 'lib/addTrack'>
-  removeTrack: ActionCreatorWithPayload<any, 'lib/removeTrack'>
+  currentId?: string
+  play?: boolean
+  userTracks?: Lib
+  addTrack?: ActionCreatorWithPayload<any, 'lib/addTrack'>
+  removeTrack?: ActionCreatorWithPayload<any, 'lib/removeTrack'>
 }
 
 export const TrackItem: FC<ITrackItemProps> = ({
@@ -34,7 +34,7 @@ export const TrackItem: FC<ITrackItemProps> = ({
 }) => {
   const isActive = currentId === track._id
 
-  const isLiked = userTracks.tracks.some((tr: Track) => tr._id === track._id)
+  const isLiked = userTracks?.tracks.some((tr: Track) => tr._id === track._id)
 
   const isAuth = useIsAuth()
 
@@ -43,7 +43,7 @@ export const TrackItem: FC<ITrackItemProps> = ({
 
   const handleToggleLib = (e: any) => {
     e.stopPropagation()
-    if (isLoading || isLoadingDel) return
+    if (isLoading || isLoadingDel || !addTrack || !removeTrack) return
     try {
       if (isLiked) {
         patchDelLib({
@@ -64,7 +64,7 @@ export const TrackItem: FC<ITrackItemProps> = ({
       <button onClick={handleToggleLib}>
         {(isLoading || isLoadingDel) ? (
 
-          <BeatLoader size={5} color={'white'} />
+          <BeatLoader size={3} color={'white'} />
         ) :
           isLiked ? (
             <FaMinus size={16} />
@@ -75,18 +75,21 @@ export const TrackItem: FC<ITrackItemProps> = ({
     )}
   </>
 
+
+  const TogglePlayButton = () =>
+    addTrack && <>{isActive ? (
+      play ? (
+        <FaPause size={16} color={'var(--color-primary)'} />
+      ) : (
+        <FaPlay size={16} color={'var(--color-primary)'} />
+      )
+    ) : (
+      <FaPlay size={16} color={'var(--color-text)'} />
+    )}</>
+
   return (
     <article className={cn(styles.track, isActive && styles.active)} {...rest}>
-      {isActive ? (
-        play ? (
-          <FaPause size={16} color={'var(--color-primary)'} />
-        ) : (
-          <FaPlay size={16} color={'var(--color-primary)'} />
-        )
-      ) : (
-        <FaPlay size={16} color={'var(--color-text)'} />
-      )}
-
+      <TogglePlayButton />
       <div className={styles.name}>
         <h3>{track.name}</h3>
         <p className='text-desc'>

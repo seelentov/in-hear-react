@@ -1,4 +1,4 @@
-import cn from 'classnames'
+
 import { ArtistsList } from 'components/ordinary/ArtistsList/ArtistsList'
 import { FC } from 'react'
 import { useGetTopArtistsQuery } from 'store/api/artists.api'
@@ -19,7 +19,6 @@ export const TopArtists: FC<ITopArtistsProps> = ({ grid }) => {
 				showLikes
 				artists={data ? data : []}
 				grid={grid}
-				className={cn(grid && styles.list)}
 			/>
 		</div>
 	)

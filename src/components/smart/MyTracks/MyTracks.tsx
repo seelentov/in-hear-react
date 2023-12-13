@@ -11,15 +11,15 @@ export interface IMyTracksProps {
 export const MyTracks: FC<IMyTracksProps> = ({ tracks, loading }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const isEmpty = tracks?.length === 0
+  const lessSix = tracks && tracks?.length < 6
 
-  const showTracks = isOpen ? tracks : tracks?.slice(0, 6)
+  const showTracks = isOpen ? tracks : tracks?.slice(0, 5)
 
   return (
     <div className={styles.myTracks}>
       <div className={styles.header}>
         <h2>Tracks</h2>
-        {!isEmpty && <button onClick={() => setIsOpen(!isOpen)}>
+        {!lessSix && <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? 'HIDE' : 'MORE'}
         </button>}
       </div>

@@ -6,6 +6,12 @@
   padding: 9px;
   transition: scale .2s;
   border-radius: 12px;
+  min-width: 0;
+
+  svg {
+    min-width: 16px;
+    ;
+  }
 
   &:hover {
     scale: 0.99
@@ -20,16 +26,20 @@
     background: transparent;
     color: black;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    max-width: 20px;
+    max-height: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+
     &:hover {
       background: black;
       color: white;
     }
-    &:active{
+
+    &:active {
       background: var(--color-gradient-primary);
       color: white;
     }
@@ -37,10 +47,19 @@
 }
 
 .name {
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 4px;
   margin-right: auto;
+  min-width: 0;
+
+  h3 {
+    width: 98%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .active {

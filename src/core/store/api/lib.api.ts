@@ -1,14 +1,16 @@
 import { Lib } from 'models/Lib.js'
-import { api, onQueryStartedErrorToast } from './api.js'
+import { api } from './api.js'
 
 export const libApi = api.injectEndpoints({
 	endpoints: builder => ({
+    getLib: builder.query<Lib, void>({
+			query: () => 'lib/',
+		}),
 		patchLib: builder.mutation<Lib, any>({
 			query: body => ({
 				url: 'lib/',
 				method: 'PATCH',
-				body: body,
-				onQueryStarted: onQueryStartedErrorToast,
+				body: body,	
 			}),
 		}),
     patchDelLib: builder.mutation<Lib, any>({
@@ -16,7 +18,6 @@ export const libApi = api.injectEndpoints({
 				url: 'lib/?action=del',
 				method: 'PATCH',
 				body: body,
-				onQueryStarted: onQueryStartedErrorToast,
 			}),
 		}),
 	}),
@@ -24,3 +25,4 @@ export const libApi = api.injectEndpoints({
 
 export const { usePatchLibMutation } = libApi
 export const { usePatchDelLibMutation } = libApi
+export const { useGetLibQuery } = libApi

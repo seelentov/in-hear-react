@@ -51,7 +51,7 @@ export const PlaylistMore: FC<IPlaylistMoreProps> = ({
         <PlaylistControls {...{ handlePlay, liked, type, info }} />
       </div>
 
-      <TracksList showLikes tracks={tracks ? tracks : []} loading={tracksLoading} />
+      <TracksList canLike showLikes tracks={tracks ? tracks : []} loading={tracksLoading} />
     </div>
   )
 }

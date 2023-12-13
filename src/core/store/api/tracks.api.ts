@@ -1,19 +1,37 @@
 import { Track } from 'models/Track.js'
-import { api, onQueryStartedErrorToast } from './api.js'
+import { api } from './api.js'
+
+export interface IUploadTrack {
+  name: string,
+  artist: string,
+  src: string,
+  duration: number
+}
 
 export const tracksApi = api.injectEndpoints({
 	endpoints: builder => ({
 		getTopChart: builder.query<Track[], void>({
 			query: () => 'tracks/?order=likes&limit=8',
 			providesTags: ['tracks'],
-			onQueryStarted: onQueryStartedErrorToast,
 		}),
 		getArtistTracks: builder.query<Track[], string>({
-			query: artist => `tracks/?artist=${artist}`,
+			query: artist => `tracks/?artist=${artist}?order=likes`,
 			providesTags: ['tracks'],
-			onQueryStarted: onQueryStartedErrorToast,
+      
+		}),
+    getFilterTracks: builder.query<Track[], string>({
+			query: filter => `tracks/?filter=${filter}`,
+			providesTags: ['tracks'],
+		}),
+    postTrack: builder.mutation<Track, IUploadTrack>({
+			query: body => ({
+				url: 'tracks/',
+				method: 'POST',
+				body: body,
+			}),
+      invalidatesTags: ['tracks'],
 		}),
 	}),
 })
 
-export const { useGetTopChartQuery, useGetArtistTracksQuery } = tracksApi
+export const { useGetTopChartQuery, useGetArtistTracksQuery, usePostTrackMutation, useGetFilterTracksQuery } = tracksApi

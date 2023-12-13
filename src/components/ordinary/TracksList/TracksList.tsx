@@ -1,12 +1,14 @@
 import cn from 'classnames'
 import { TrackItem } from 'components/simple/TrackItem/TrackItem'
+import { UploadTracks } from 'components/smart/UploadTracks/UploadTracks'
 import { TrackLoading } from 'components/ui/TrackLoading/TrackLoading'
 import { useActions } from 'hooks/useActions'
 import { useStoreBy } from 'hooks/useStoreBy'
 import { Track } from 'models/Track'
-import { FC, HTMLAttributes } from 'react'
-import styles from './TracksList.module.scss'
+import { ModalContext } from 'providers/ModalProvider/ModalProvider'
+import { FC, HTMLAttributes, useContext } from 'react'
 import { FaPlus } from 'react-icons/fa'
+import styles from './TracksList.module.scss'
 export interface ITracksListProps extends HTMLAttributes<HTMLOListElement> {
   tracks?: Track[]
   grid?: boolean
@@ -32,6 +34,8 @@ export const TracksList: FC<ITracksListProps> = ({
 
   const { currentId, play } = useStoreBy('player')
   const { data: userTracks } = useStoreBy('lib')
+  const { openModal } = useContext(ModalContext)
+
 
   const handlePlay = (isActive: boolean, currentTrack: string) => {
     if (isActive) {
@@ -41,7 +45,15 @@ export const TracksList: FC<ITracksListProps> = ({
     }
   }
 
-  if (loading) {
+  const handleUpload = (e: any) => {
+    const files = Array.from(e.target.files)
+    if (!e.target.files) return
+    if (files.some((file: any) => !file.type.includes('audio'))) return alert('This is not an music!')
+    openModal(<UploadTracks uploads={files as File[]} />)
+  }
+
+
+  if (!loading && tracks?.length === 0 && !canUpload) {
     return (
       <section
         className={cn(
@@ -51,6 +63,20 @@ export const TracksList: FC<ITracksListProps> = ({
         )}
         {...rest}
       >
+        <p>Tracks not found</p>
+      </section>
+    )
+  }
+
+
+  if (loading) {
+    return (
+      <section className={cn(
+        className,
+        grid ? styles.tracksListGrid : styles.tracksListColumn,
+        styles.loading
+      )}
+        {...rest}>
         {[...Array(4)].map(key => (
           <TrackLoading key={key} />
         ))}
@@ -66,9 +92,10 @@ export const TracksList: FC<ITracksListProps> = ({
       )}
       {...rest}
     >
-      {canUpload && <div className={styles.upload}>
+      {canUpload && <label className={styles.upload}>
         <FaPlus size={16} />
-      </div>}
+        <input type="file" hidden multiple onChange={handleUpload} />
+      </label>}
       {tracks?.map(track => {
         const isActive = currentId === track._id
 
@@ -80,7 +107,7 @@ export const TracksList: FC<ITracksListProps> = ({
               track,
               showLikes,
               canLike,
-              currentId,
+            currentId,
               play,
               userTracks,
               addTrack,
@@ -89,7 +116,7 @@ export const TracksList: FC<ITracksListProps> = ({
           />
         )
       })}
-      
+
     </section>
   )
 }

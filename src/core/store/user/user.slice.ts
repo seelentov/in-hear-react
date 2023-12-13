@@ -6,8 +6,7 @@ const initialState: User = {
 	login: '',
 	avatarUrl: '',
 	role: '',
-	email: '',
-	token: '',
+	email: ''
 }
 
 export const userSlice = createSlice({
@@ -20,10 +19,6 @@ export const userSlice = createSlice({
 			state.login = user.login
 			state.email = user.email
 			state.avatarUrl = user.avatarUrl
-		},
-		setToken: (state: User, { payload: token }) => {
-			state.token = token
-			localStorage.setItem('token', token)
 		},
 		logout: (state: User) => {
 			state._id = initialState._id

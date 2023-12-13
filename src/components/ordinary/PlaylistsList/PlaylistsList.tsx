@@ -1,10 +1,13 @@
 import cn from 'classnames'
 import { PlaylistItem } from 'components/simple/PlaylistItem/PlaylistItem'
+import { EditPlaylist } from 'components/smart/EditPlaylist/EditPlaylist'
 import { PlaylistLoading } from 'components/ui/PlaylistLoading/PlaylistLoading'
 import { useActions } from 'hooks/useActions'
 import { useStoreBy } from 'hooks/useStoreBy'
 import { Playlist } from 'models/Playlist'
-import { FC, HTMLAttributes } from 'react'
+import { ModalContext } from 'providers/ModalProvider/ModalProvider'
+import { FC, HTMLAttributes, useContext } from 'react'
+import { FaPlus } from 'react-icons/fa'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import styles from './PlaylistsList.module.scss'
 
@@ -14,6 +17,7 @@ export interface IPlaylistsProps extends HTMLAttributes<HTMLDivElement> {
   showLikes?: boolean
   className?: string
   loading?: boolean
+  canUpload?: boolean
 }
 
 export const PlaylistsList: FC<IPlaylistsProps> = ({
@@ -22,12 +26,15 @@ export const PlaylistsList: FC<IPlaylistsProps> = ({
   showLikes,
   className,
   loading,
+  canUpload,
   ...rest
 }) => {
 
   const { playPlaylist, removePlaylist, addPlaylist } = useActions()
 
   const { data: userPlaylists } = useStoreBy('lib')
+
+  const { openModal } = useContext(ModalContext)
 
   const swiperConfig = {
     spaceBetween: 30,
@@ -54,7 +61,7 @@ export const PlaylistsList: FC<IPlaylistsProps> = ({
     },
   }
 
-  if (!loading && playlists?.length === 0) {
+  if (!loading && playlists?.length === 0 && !canUpload) {
     return (
       <section className={cn(className, styles.playlistsGrid)} {...rest}>
         <p>Playlists not found</p>
@@ -78,6 +85,7 @@ export const PlaylistsList: FC<IPlaylistsProps> = ({
           {...swiperConfig}
           className={cn(className, styles.playlistsGrid)}
         >
+
           {[...Array(10)].map(key => (
             <SwiperSlide key={key}>
               <PlaylistLoading />
@@ -91,6 +99,9 @@ export const PlaylistsList: FC<IPlaylistsProps> = ({
   if (grid) {
     return (
       <section className={cn(className, styles.playlistsGrid)} {...rest}>
+        {canUpload && <div className={styles.upload} onClick={() => openModal(<EditPlaylist action="create" />)}>
+          <FaPlus size={16} />
+        </div>}
         {playlists.map(playlist => (
           <PlaylistItem
             key={playlist._id}
@@ -110,7 +121,11 @@ export const PlaylistsList: FC<IPlaylistsProps> = ({
   return (
     <section>
       <Swiper {...swiperConfig} className={cn(className, styles.playlistsGrid)}>
+        {canUpload && <SwiperSlide><div className={styles.upload} onClick={() => openModal(<EditPlaylist action="create" />)}>
+          <FaPlus size={16} />
+        </div></SwiperSlide>}
         {playlists.map(playlist => (
+
           <SwiperSlide key={playlist._id}>
             <PlaylistItem
               {...{

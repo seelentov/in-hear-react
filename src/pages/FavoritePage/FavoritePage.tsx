@@ -22,7 +22,7 @@ export const FavoritePage = () => {
 		if (!isAuth) {
 			navigate(HREF.HOME)
 		}
-	}, [isAuth])
+	}, [isAuth, navigate])
 
 	const { data } = useStoreBy('lib')
 

@@ -20,7 +20,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  button {
+  input,
+  button,
+  textarea {
     font-family: 'Montserrat',
       sans-serif;
     font-weight: 400;
@@ -69,6 +71,6 @@
   }
 }
 
-.wrapperAccordionClose{
+.wrapperAccordionClose {
   max-height: 0px;
 }

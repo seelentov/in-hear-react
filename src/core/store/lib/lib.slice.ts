@@ -32,7 +32,7 @@ export const libSlice = createSlice({
 	initialState,
 	reducers: {
 		addTrack: (state, { payload }) => {
-			state.data.tracks.push(payload)
+			state.data.tracks.unshift(payload)
 		},
 		removeTrack: (state, { payload }) => {
 			state.data.tracks = state.data.tracks.filter(
@@ -40,7 +40,7 @@ export const libSlice = createSlice({
 			)
 		},
     addPlaylist: (state, { payload }) => {
-			state.data.playlists.push(payload)
+			state.data.playlists.unshift(payload)
 		},
 		removePlaylist: (state, { payload }) => {
 			state.data.playlists = state.data.playlists.filter(
@@ -48,7 +48,7 @@ export const libSlice = createSlice({
 			)
 		},
     addArtist: (state, { payload }) => {
-			state.data.artists.push(payload)
+			state.data.artists.unshift(payload)
 		},
 		removeArtist: (state, { payload }) => {
 			state.data.artists = state.data.artists.filter(

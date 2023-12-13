@@ -12,22 +12,22 @@ export interface IMyTracksProps {
 export const MyPlaylists: FC<IMyTracksProps> = ({ playlists, loading }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const showPlaylists = isOpen ? playlists : playlists?.slice(0, 6)
+  const showPlaylists = isOpen ? playlists : playlists?.slice(0, 5)
 
-  const isEmpty = playlists?.length === 0
+  const lessSix = playlists && playlists?.length < 6
 
 
   return (
     <div className={styles.myPlaylists}>
       <div className={styles.header}>
         <h2>Playlists</h2>
-        {!isEmpty && <button onClick={() => setIsOpen(!isOpen)}>
+        {!lessSix && <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? 'HIDE' : 'MORE'}
         </button>}
       </div>
       <PlaylistsList
+        canUpload
         loading={loading}
-        className={styles.playlists}
         playlists={showPlaylists || []}
         grid={isOpen}
       />

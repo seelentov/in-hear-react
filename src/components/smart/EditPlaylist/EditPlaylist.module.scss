@@ -1,0 +1,41 @@
+.editArtist{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.image{
+  overflow: hidden;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  sup{
+    z-index: 10;
+    font-size: 20px;
+    color: white;
+  }
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+  }
+  cursor: pointer;
+}
+
+.container{
+  height: 400px;
+  overflow-y: scroll;
+  -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  width: 100%;
+  padding: 10px;
+}

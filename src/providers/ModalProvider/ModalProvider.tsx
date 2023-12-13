@@ -1,4 +1,4 @@
-import { UploadTracks } from 'components/smart/UploadTracks/UploadTracks'
+
 import { Modal } from 'components/ui/Modal/Modal'
 import {
   FC,
@@ -22,8 +22,8 @@ export const ModalContext = createContext<IModalContext>({} as IModalContext)
 
 export const ModalProvider: FC<PropsWithChildren> = ({ children }) => {
   const [modal, setModal] = useState<IModalProps>({
-    isOpen: true,
-    modalElement: <UploadTracks/>,
+    isOpen: false,
+    modalElement: '',
   })
 
   const openModal = (component: ReactNode) => {

@@ -15,7 +15,7 @@ export const tracksApi = api.injectEndpoints({
 			providesTags: ['tracks'],
 		}),
 		getArtistTracks: builder.query<Track[], string>({
-			query: artist => `tracks/?artist=${artist}?order=likes`,
+			query: artist => `tracks/?artist=${artist}&order=likes`,
 			providesTags: ['tracks'],
       
 		}),
@@ -31,7 +31,14 @@ export const tracksApi = api.injectEndpoints({
 			}),
       invalidatesTags: ['tracks'],
 		}),
+    deleteTrack: builder.mutation<Track, string>({
+			query: (id) => ({
+				url: `tracks/${id}`,
+				method: 'DELETE',
+			}),
+      invalidatesTags: ['tracks'],
+		}),
 	}),
 })
 
-export const { useGetTopChartQuery, useGetArtistTracksQuery, usePostTrackMutation, useGetFilterTracksQuery } = tracksApi
+export const { useGetTopChartQuery, useGetArtistTracksQuery, usePostTrackMutation, useGetFilterTracksQuery, useDeleteTrackMutation } = tracksApi

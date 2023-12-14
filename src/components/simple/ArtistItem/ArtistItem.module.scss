@@ -10,5 +10,10 @@
   object-fit: cover;
   border-radius: 50%;
   }
+  h3{
+    text-overflow: ellipsis;
+    max-width: 100%;
+    overflow: hidden;
+  }
 }
 

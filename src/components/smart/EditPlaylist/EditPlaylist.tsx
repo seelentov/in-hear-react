@@ -11,11 +11,11 @@ import { Playlist } from 'models/Playlist'
 import { Track } from 'models/Track'
 import { ModalContext } from 'providers/ModalProvider/ModalProvider'
 import { FC, FormEvent, useContext, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { API_URL } from 'store/api/api'
 import { usePatchLibMutation } from 'store/api/lib.api'
 import { useEditPlaylistMutation, usePostPlaylistMutation } from 'store/api/playlist.api'
 import styles from './EditPlaylist.module.scss'
-import { useNavigate } from 'react-router-dom'
 
 export interface IEditPlaylistProps {
   playlist?: Playlist
@@ -46,9 +46,8 @@ export const EditPlaylist: FC<IEditPlaylistProps> = ({ playlist, action }) => {
     .filter((userTrack: Track) => playlistTracks.every((playlistTrack: Track) => userTrack._id !== playlistTrack._id))
     .filter((track: Track) => {
       if (debounceUserTracksFilter === '') return true
-      return track.name.includes(debounceUserTracksFilter) || track.artist.includes(debounceUserTracksFilter)
+      return track.name.toLowerCase().includes(debounceUserTracksFilter.toLowerCase()) || track.artist.toLowerCase().includes(debounceUserTracksFilter.toLowerCase())
     }), [tracks, debounceUserTracksFilter, playlistTracks])
-
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -56,8 +55,9 @@ export const EditPlaylist: FC<IEditPlaylistProps> = ({ playlist, action }) => {
       if (!desc || !name || !imageUrl || !playlistTracks) return alert('Enter all fields!')
       if (isLoading || isLoadingPost) return
       e.preventDefault()
+      const tracks = playlistTracks.map(track => track._id) as any
       if (action === 'edit' && playlist) {
-        const tracks = playlistTracks.map(track => track._id) as any
+
 
         editPlaylist({
           _id: playlist._id,
@@ -67,6 +67,7 @@ export const EditPlaylist: FC<IEditPlaylistProps> = ({ playlist, action }) => {
           return alert('Information successfully updated!')
         })
       } else {
+        
         postPlaylist({
           name, desc, imageUrl, tracks, author: userId
         }).then((res: any) => {
@@ -123,12 +124,12 @@ export const EditPlaylist: FC<IEditPlaylistProps> = ({ playlist, action }) => {
 
         <Input value={userTracksFilter} onChange={(e) => setUserTracksFilter(e.target.value)} type="text" placeholder='Search...' />
         <div className={styles.container}>
-          {userTracks.length === 0 && <p>All your tracks in playlist</p>}
-          {userTracks.map((track: Track) => <TrackItem track={track} key={track._id} onClick={(e) => addTrack(e, track)} />)}
+          {userTracks.length === 0 && <p>Not found...</p>}
+          {userTracks.map((track: Track) => <TrackItem hidePlayBtn track={track} key={track._id} onClick={(e) => addTrack(e, track)} />)}
         </div>
         <div className={styles.container}>
           {playlistTracks.length === 0 && <p>Empty..</p>}
-          {playlistTracks.map((track: Track) => <TrackItem track={track} key={track._id} onClick={(e) => removeTrack(e, track._id)} />)}
+          {playlistTracks.map((track: Track) => <TrackItem hidePlayBtn track={track} key={track._id} onClick={(e) => removeTrack(e, track._id)} />)}
         </div>
         <Button>Save</Button>
       </form>

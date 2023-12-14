@@ -33,17 +33,22 @@ export const UploadTracks: FC<IUploadTracksProps> = ({ uploads }) => {
   const { addTrack } = useActions()
 
   const [files, setFiles] = useState<IUploadMusicFile[]>(uploads.map((upload: File, key: number) => {
+    const name = upload.name.split('-').slice(1).join('').replace(/\.[^.]+$/, "").trim()
+    const artist = upload.name.split('-')[0].trim()
     return {
       key,
-      name: upload.name,
-      artist: 'Untitled',
+      name,
+      artist,
       file: upload
     }
   }))
 
   const handleUpload = async () => {
     try {
-      files.forEach(fileUpload)
+      if (files.some(file => file.name === '' || file.artist === '')){
+        return alert('Enter all names and artists')
+      }
+        files.forEach(fileUpload)
       closeModal()
     } catch (error) {
       alert(error)
@@ -59,8 +64,8 @@ export const UploadTracks: FC<IUploadTracksProps> = ({ uploads }) => {
       audio.setAttribute('src', response.data.url)
       audio.onloadedmetadata = async () => {
         await postTrack({
-          name: file.name,
-          artist: file.artist,
+          name: file.name.substring(0, 40),
+          artist: file.artist.substring(0, 40),
           src: response.data.url,
           duration: audio.duration * 100
         }
@@ -102,9 +107,7 @@ const UploadTracksItem: FC<IUploadTracksItemProps> = ({ file, setFiles }) => {
       const updatedFiles = [...prevFiles];
       const fileIndex = updatedFiles.findIndex(thisFile => thisFile.key === file.key);
 
-      const validateValue = value ? value : 'Untitled'
-
-      updatedFiles[fileIndex] = { ...updatedFiles[fileIndex], [name]: validateValue };
+      updatedFiles[fileIndex] = { ...updatedFiles[fileIndex], [name]: value };
       return updatedFiles;
     });
   }

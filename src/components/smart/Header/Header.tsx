@@ -60,15 +60,15 @@ export const Header: FC<IHeaderProps> = () => {
   return (
     <div className={styles.header}>
       <ButtonHamburger />
-      <form>
-        <Input
-          value={filter}
-          name='search'
-          icon={<CiSearch />}
-          placeholder='Search artist, track, playlist...'
-          onChange={(e) => setFilter(e.target.value)}
-        />
-      </form>
+
+      <Input
+        value={filter}
+        name='search'
+        icon={<CiSearch />}
+        placeholder='Search artist, track, playlist...'
+        onChange={(e) => setFilter(e.target.value)}
+      />
+
       <UserAvatar />
     </div>
   )

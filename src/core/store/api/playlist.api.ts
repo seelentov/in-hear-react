@@ -12,7 +12,7 @@ export const playlistsApi = api.injectEndpoints({
 			providesTags: ['playlists'],
 		}),
     getFilterPlaylist: builder.query<Playlist[], string>({
-			query: filter => `playlists/?filter=${filter}`,
+			query: filter => `playlists/?filter=${filter}&order=likes`,
 			providesTags: ['playlists'],
 		}),
     editPlaylist: builder.mutation<Playlist, Partial<Playlist>>({
@@ -31,7 +31,14 @@ export const playlistsApi = api.injectEndpoints({
 			}),
 			invalidatesTags: ['playlists'],
 		}),
+    deletePlaylist: builder.mutation<Playlist, string>({
+			query: (id) => ({
+				url: `playlists/${id}`,
+				method: 'DELETE',
+			}),
+			invalidatesTags: ['playlists'],
+		}),
 	}),
 })
 
-export const { useGetTopPlaylistsQuery, useGetPlaylistQuery, useGetFilterPlaylistQuery, usePostPlaylistMutation, useEditPlaylistMutation } = playlistsApi
+export const { useGetTopPlaylistsQuery, useGetPlaylistQuery, useGetFilterPlaylistQuery, usePostPlaylistMutation, useEditPlaylistMutation, useDeletePlaylistMutation } = playlistsApi

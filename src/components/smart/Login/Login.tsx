@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import { Button } from 'components/ui/Button/Button'
-import { Loading } from 'components/ui/Loading/Loading'
+import { LoadingGlobal } from 'components/ui/LoadingGlobal/LoadingGlobal'
 import { useActions } from 'hooks/useActions'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
@@ -64,7 +64,7 @@ export const Login: FC<ILoginProps> = () => {
   return (
     <>
       {isLoading ? (
-        <Loading />
+        <LoadingGlobal />
       ) : (
         <form className={styles.login} onSubmit={handleSubmit(onSubmit)}>
           <input

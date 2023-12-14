@@ -63,6 +63,7 @@ export const Player: FC<IPlayerProps> = () => {
 							setDuration,
 							progressBarRef,
 							handleNext,
+              tracks
 						}}
 					/>
 					<div className={styles.center}>

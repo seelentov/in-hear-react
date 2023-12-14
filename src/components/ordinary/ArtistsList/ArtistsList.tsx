@@ -91,6 +91,10 @@ export const ArtistsList: FC<IArtistsListProps> = ({
   if (grid) {
     return (
       <section className={cn(className, styles.artistsGrid)} {...rest}>
+        {canUpload &&
+          <div className={styles.upload} onClick={() => openModal(<EditArtist action='create' />)}>
+            <FaPlus size={32} />
+          </div>}
         {artists.map(artist => (
           <ArtistItem artist={artist} key={artist._id} showLikes={showLikes} />
         ))}
@@ -103,8 +107,8 @@ export const ArtistsList: FC<IArtistsListProps> = ({
 
         {canUpload && <SwiperSlide>
           <div className={styles.upload} onClick={() => openModal(<EditArtist action='create' />)}>
-          <FaPlus size={32} />
-        </div>
+            <FaPlus size={32} />
+          </div>
         </SwiperSlide>}
 
         {artists.map(artist => (

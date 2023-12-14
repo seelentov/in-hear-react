@@ -1,6 +1,6 @@
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { User } from 'firebase/auth'
+import { User } from 'models/User'
 
 export const API_URL = 'http://localhost:4444/api/'
 

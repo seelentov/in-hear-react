@@ -25,7 +25,9 @@ function App() {
     <BrowserRouter>
       <Layout>
         <ModalProvider>
+
           <Router />
+
         </ModalProvider>
       </Layout>
     </BrowserRouter>

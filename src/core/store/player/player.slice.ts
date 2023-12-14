@@ -20,6 +20,7 @@ export const playerSlice = createSlice({
 	initialState,
 	reducers: {
 		nextTrack: state => {
+
 			if (state.currentTrack < state.playlist.length - 1) {
 				state.currentTrack++
 				state.currentId = state.playlist[state.currentTrack]._id
@@ -31,6 +32,7 @@ export const playerSlice = createSlice({
 			}
 		},
 		prevTrack: state => {
+
 			if (state.currentTrack === 0) {
 				state.currentTrack = state.playlist.length - 1
 				state.currentId = state.playlist[state.currentTrack]._id

@@ -17,6 +17,7 @@ export interface ITracksListProps extends HTMLAttributes<HTMLOListElement> {
   canLike?: boolean
   loading?: boolean
   canUpload?: boolean
+  hidePlayBtn?: boolean
 }
 
 export const TracksList: FC<ITracksListProps> = ({
@@ -27,6 +28,7 @@ export const TracksList: FC<ITracksListProps> = ({
   canLike,
   loading,
   canUpload,
+  hidePlayBtn,
   ...rest
 }) => {
   const { playTracks, toggleTrack, addTrack, removeTrack } = useActions()
@@ -112,6 +114,7 @@ export const TracksList: FC<ITracksListProps> = ({
               userTracks,
               addTrack,
               removeTrack,
+              hidePlayBtn
             }}
           />
         )

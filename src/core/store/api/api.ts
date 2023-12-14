@@ -2,7 +2,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { User } from 'models/User'
 
-export const API_URL = 'http://localhost:4444/api/'
+export const API_URL = 'https://in-hear-backend-production.up.railway.app/api/'
 
 export interface loginData {
 	email: string

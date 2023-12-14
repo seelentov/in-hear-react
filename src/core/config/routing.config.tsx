@@ -3,6 +3,7 @@ import { ArtistPage } from 'pages/ArtistsPage/ArtistPage'
 import { FavoritePage } from 'pages/FavoritePage/FavoritePage'
 import { HomePage } from 'pages/HomePage/HomePage'
 import { LoginPage } from 'pages/LoginPage/LoginPage'
+import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage'
 import { PlaylistPage } from 'pages/PlaylistPage/PlaylistPage'
 import { SearchPage } from 'pages/SearchPage/SearchPage'
 import { TopArtistsPage } from 'pages/TopArtistsPage/TopArtistsPage'
@@ -35,6 +36,7 @@ export const ROUTING = [
   { href: HREF.PLAYLISTS + ':id', component: <PlaylistPage />, name: 'Playlists' },
   { href: HREF.LOGIN, component: <LoginPage />, name: 'Login' },
   { href: HREF.SEARCH, component: <SearchPage />, name: 'Search' },
+  { href: HREF.EMPTY, component: <NotFoundPage />, name: '404' },
 ]
 
 export type ROUTING = (typeof ROUTING)[keyof typeof ROUTING]

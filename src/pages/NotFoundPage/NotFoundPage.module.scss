@@ -1,0 +1,12 @@
+.notFound{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  h3{
+    font-size: 40px;
+    font-weight: 700;
+  }
+  height: 100vh;
+}

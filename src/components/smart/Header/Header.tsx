@@ -28,7 +28,7 @@ export const Header: FC<IHeaderProps> = () => {
     if (filter.length > 0) {
       navigate(HREF.SEARCH)
     }
-  }, [filterDebounce, navigate])
+  }, [filterDebounce])
 
   const ButtonHamburger = () => <>{!isScreenLg && (
     <div className={styles.burgerBtn} onClick={() => toggleMenu()}>
